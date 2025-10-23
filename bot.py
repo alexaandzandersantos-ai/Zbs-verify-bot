@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands, tasks
+import warnings
+warnings.filterwarnings("ignore", message="audioop")
 from discord import app_commands, Embed, ButtonStyle
 from discord.ui import View, Button
 import os
