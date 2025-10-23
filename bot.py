@@ -2,6 +2,22 @@
 import sys, types
 sys.modules['audioop'] = types.ModuleType('audioop')
 # ---------------------------------------------------------------
+# --- keep-alive server for Render ---
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Zander Verification Bot is running!"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+Thread(target=run).start()
+# --- end of keep-alive server ---
+
 import discord
 from discord.ext import commands, tasks
 import warnings
