@@ -121,4 +121,6 @@ async def reject(ctx, member: discord.Member):
     except discord.Forbidden:
         await ctx.send("⚠️ Could not DM the user.")
 
-bot.run(TOKEN)
+import os
+bot.run(os.getenv("TOKEN"))
+
