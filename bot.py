@@ -132,6 +132,32 @@ async def on_interaction(interaction: discord.Interaction):
             )
         except discord.Forbidden:
             await interaction.followup.send("⚠️ Please enable your DMs to continue.", ephemeral=True)
+# --- Buttons for moderators in the review channel ---
+class ReviewButtons(discord.ui.View):
+    def __init__(self, member):
+        super().__init__(timeout=None)
+        self.member = member  # the person being reviewed
+
+    @discord.ui.button(label="Approve ✅", style=discord.ButtonStyle.green)
+    async def approve_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+        role = discord.utils.get(interaction.guild.roles, name=VERIFIED_ROLE_NAME)
+        if role:
+            await self.member.add_roles(role)
+            await interaction.response.send_message(f"✅ {self.member.mention} has been verified!", ephemeral=False)
+            try:
+                await self.member.send("🎉 You’ve been verified! You now have full access to the server.")
+            except discord.Forbidden:
+                pass
+        else:
+            await interaction.response.send_message("⚠️ Verified role not found.", ephemeral=True)
+
+    @discord.ui.button(label="Reject ❌", style=discord.ButtonStyle.red)
+    async def reject_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+        try:
+            await self.member.send("❌ Your verification was rejected. Please try again following all instructions carefully.")
+            await interaction.response.send_message(f"❌ {self.member.mention} has been rejected and notified.", ephemeral=False)
+        except discord.Forbidden:
+            await interaction.response.send_message("⚠️ Could not DM the user.", ephemeral=True)
 
 @bot.event
 async def on_message(message):
