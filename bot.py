@@ -99,7 +99,7 @@ async def refresh_verification_message():
                 description=(
                     "Click the **Verify** button below to start the process in DM.\n\n"
                     "📸 Make sure to:\n"
-                    "- Send a photo with 🫰🏻 pose while holding a comb (no need to show your face)\n"
+                    "- Send a photo with 🫰🏻 pose while holding a paper with your name (no need to show your face)\n"
                     "- Send your Facebook **profile link**\n"
                     "- Send a **screenshot** showing you:\n"
                     "  1️⃣ Followed my **Facebook profile** → [Click here](https://www.facebook.com/share/16XELgaE47/)\n"
@@ -121,9 +121,9 @@ async def on_interaction(interaction: discord.Interaction):
         )
         try:
             await interaction.user.send(
-                "👋 Hi! Let’s start your verification.\n\n"
+                "👋 Ayo! Let’s start your verification.\n\n"
                 "Please send the following here:\n"
-                "1️⃣ A photo of you doing a 🫰🏻 pose while holding a comb\n"
+                "1️⃣ A photo of you doing a 🫰🏻 pose while holding a paper with your name (no need to show your face)\n"
                 "2️⃣ Your Facebook profile link\n"
                 "3️⃣ Screenshot showing you:\n"
                 "   - Followed the Facebook profile\n"
@@ -145,7 +145,7 @@ class ReviewButtons(discord.ui.View):
             await self.member.add_roles(role)
             await interaction.response.send_message(f"✅ {self.member.mention} has been verified!", ephemeral=False)
             try:
-                await self.member.send("🎉 You’ve been verified! You now have full access to the server.")
+                await self.member.send("🎉 Yey! You’ve been verified! You now have full access to Zander Beaulievers server.")
             except discord.Forbidden:
                 pass
         else:
@@ -154,7 +154,7 @@ class ReviewButtons(discord.ui.View):
     @discord.ui.button(label="Reject ❌", style=discord.ButtonStyle.red)
     async def reject_button(self, interaction: discord.Interaction, button: discord.ui.Button):
         try:
-            await self.member.send("❌ Your verification was rejected. Please try again following all instructions carefully.")
+            await self.member.send("❌ Your verification was rejected. Pasaway! Please try again following all instructions carefully.")
             await interaction.response.send_message(f"❌ {self.member.mention} has been rejected and notified.", ephemeral=False)
         except discord.Forbidden:
             await interaction.response.send_message("⚠️ Could not DM the user.", ephemeral=True)
