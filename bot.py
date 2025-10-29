@@ -140,10 +140,11 @@ async def on_message(message):
         if review_channel:
             files = [await a.to_file() for a in message.attachments]
             await review_channel.send(
-                f"📩 **New verification from:** {message.author.mention}\n"
-                f"🆔 ID: `{message.author.id}`",
-                files=files,
-            )
+    f"📩 **New verification from:** {message.author.mention}\n"
+    f"🆔 ID: `{message.author.id}`",
+    files=files,
+    view=ReviewButtons(message.author)
+)
             if message.content:
                 await review_channel.send(f"📝 **Message:** {message.content}")
             await message.channel.send("✅ Submission sent! Please wait while moderators verify you.")
