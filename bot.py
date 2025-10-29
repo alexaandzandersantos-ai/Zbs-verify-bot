@@ -30,7 +30,7 @@ import os
 TOKEN = os.getenv("TOKEN")  # token will be set later in Render
 GUILD_ID = 1428650568250953758  # replace with your server ID
 VERIFICATION_CHANNEL_ID = 1428709658415337605  # replace with your #verification channel ID
-REVIEW_CHANNEL_ID = 1428709658415337605  # replace with your private review channel ID
+REVIEW_CHANNEL_ID = 1430539644134494229  # replace with your private review channel ID
 VERIFIED_ROLE_NAME = "verified members"  # name of the role to assign after verification
 # ----------------------
 
