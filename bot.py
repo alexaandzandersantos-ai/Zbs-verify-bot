@@ -95,11 +95,11 @@ async def refresh_verification_message():
                 if msg.author == bot.user:
                     await msg.delete()
             embed = Embed(
-                title="🪞 Selfie Verification",
+                title="🪪 Beaulievers Verification",
                 description=(
                     "Click the **Verify** button below to start the process in DM.\n\n"
                     "📸 Make sure to:\n"
-                    "- Send a photo with 🫰🏻 pose while holding a paper with your name (no need to show your face)\n"
+                    "- Send a photo with 🫰🏻 pose while holding a paper with your name and birthdate (no need to show your face)\n"
                     "- Send your Facebook **profile link**\n"
                     "- Send a **screenshot** showing you:\n"
                     "  1️⃣ Followed my **Facebook profile** → [Click here](https://www.facebook.com/share/16XELgaE47/)\n"
@@ -123,7 +123,7 @@ async def on_interaction(interaction: discord.Interaction):
             await interaction.user.send(
                 "👋 Ayo! Let’s start your verification.\n\n"
                 "Please send the following here:\n"
-                "1️⃣ A photo of you doing a 🫰🏻 pose while holding a paper with your name (no need to show your face)\n"
+                "1️⃣ A photo of you doing a 🫰🏻 pose while holding a paper with your name and birthdate (no need to show your face)\n"
                 "2️⃣ Your Facebook profile link\n"
                 "3️⃣ Screenshot showing you:\n"
                 "   - Followed the Facebook profile\n"
