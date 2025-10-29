@@ -164,15 +164,25 @@ async def on_message(message):
     if isinstance(message.channel, discord.DMChannel) and not message.author.bot:
         review_channel = bot.get_channel(REVIEW_CHANNEL_ID)
         if review_channel:
+            guild = bot.get_guild(GUILD_ID)
+            member = guild.get_member(message.author.id)  # ✅ convert User → Member
+
+            # If the user isn’t in the server, stop the process
+            if not member:
+                await message.channel.send("⚠️ You need to be in the server to complete verification.")
+                return
+
             files = [await a.to_file() for a in message.attachments]
             await review_channel.send(
-    f"📩 **New verification from:** {message.author.mention}\n"
-    f"🆔 ID: `{message.author.id}`",
-    files=files,
-    view=ReviewButtons(message.author)
-)
+                f"📩 **New verification from:** {member.mention}\n"
+                f"🆔 ID: `{member.id}`",
+                files=files,
+                view=ReviewButtons(member)  # ✅ now passes a Member, not a User
+            )
+
             if message.content:
                 await review_channel.send(f"📝 **Message:** {message.content}")
+
             await message.channel.send("✅ Submission sent! Please wait while moderators verify you.")
         else:
             await message.channel.send("⚠️ Something went wrong. Please try again later.")
