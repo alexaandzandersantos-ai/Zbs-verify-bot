@@ -31,7 +31,7 @@ TOKEN = os.getenv("TOKEN")  # token will be set later in Render
 GUILD_ID = 1428650568250953758  # replace with your server ID
 VERIFICATION_CHANNEL_ID = 1428709658415337605  # replace with your #verification channel ID
 REVIEW_CHANNEL_ID = 1430539644134494229  # replace with your private review channel ID
-VERIFIED_ROLE_NAME = "verified members"  # name of the role to assign after verification
+VERIFIED_ROLE_NAME = "Verified members"  # name of the role to assign after verification
 # ----------------------
 
 intents = discord.Intents.default()
@@ -61,7 +61,7 @@ class ReviewButtons(View):
         self.add_item(reject_button)
 
     async def approve(self, interaction: discord.Interaction):
-        role = discord.utils.get(interaction.guild.roles, name="verified members")
+        role = discord.utils.get(interaction.guild.roles, name="Verified members")
         if role:
             await self.member.add_roles(role)
             await interaction.response.send_message(f"✅ {self.member.mention} is now verified!", ephemeral=False)
