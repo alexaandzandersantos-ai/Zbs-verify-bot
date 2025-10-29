@@ -46,6 +46,40 @@ class VerifyButton(View):
         super().__init__(timeout=None)
         self.add_item(Button(label="Verify", style=ButtonStyle.green, custom_id="verify_button"))
 
+class ReviewButtons(View):
+    def __init__(self, member):
+        super().__init__(timeout=None)
+        self.member = member
+
+        approve_button = Button(label="Approve ✅", style=ButtonStyle.success)
+        reject_button = Button(label="Reject ❌", style=ButtonStyle.danger)
+
+        approve_button.callback = self.approve
+        reject_button.callback = self.reject
+
+        self.add_item(approve_button)
+        self.add_item(reject_button)
+
+    async def approve(self, interaction: discord.Interaction):
+        role = discord.utils.get(interaction.guild.roles, name="verified members")
+        if role:
+            await self.member.add_roles(role)
+            await interaction.response.send_message(f"✅ {self.member.mention} is now verified!", ephemeral=False)
+            try:
+                await self.member.send("🎉 You’ve been verified! Welcome to the community!")
+            except:
+                pass
+        else:
+            await interaction.response.send_message("⚠️ Verified role not found.", ephemeral=True)
+
+    async def reject(self, interaction: discord.Interaction):
+        try:
+            await self.member.send("❌ Your verification was rejected. Please try again in #verification.")
+            await interaction.response.send_message(f"❌ {self.member.mention} has been rejected.", ephemeral=False)
+        except discord.Forbidden:
+            await interaction.response.send_message("⚠️ Could not DM the user.", ephemeral=True)
+
+
 @bot.event
 async def on_ready():
     print(f"✅ Logged in as {bot.user}")
