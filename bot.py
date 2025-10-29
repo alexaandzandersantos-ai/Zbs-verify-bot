@@ -102,6 +102,7 @@ async def refresh_verification_message():
                     "- Send a photo with 🫰🏻 pose while holding a paper with your name and birthdate (no need to show your face)\n"
                     "- Send your Facebook **profile link**\n"
                     "- Send a **screenshot** showing you:\n"
+                    
                     "  1️⃣ Followed my **Facebook profile** → [Click here](https://www.facebook.com/share/16XELgaE47/)\n"
                     "  2️⃣ Followed my **Facebook page** → [Click here](https://www.facebook.com/share/175CgS9dWS/)\n"
                     "  3️⃣ Joined my **Facebook group** → [Click here](https://www.facebook.com/groups/800333518927857/)\n\n"
